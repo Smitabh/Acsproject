@@ -12,6 +12,7 @@ import { ObservationPage } from '../pages/observation/observation';
 import { MaintainPage } from '../pages/maintain/maintain';
 import { SearchRptPage } from '../pages/search-rpt/search-rpt';
 
+
 @Component({
   templateUrl: 'app.html'
 })

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 import { Observable } from 'rxjs/Observable';
 import { SafeResourceUrl } from '@angular/platform-browser';
@@ -34,19 +35,61 @@ export class User {
 @Injectable()
 export class AuthServiceProvider {
     currentUser: User;
+
+    constructor(private http: HttpClient,private storage: Storage) { 
+    
+    }
+
+    async getLoggedInUser() {
+      return Observable.create(observer => {
+      this.storage.get('username').then((val) => {
+        console.log('Your username', val);
+      
+      
+      observer.next(val);
+      observer.complete();
+      
+      });
+
+    });
+    }
+    
+
+
+    getUser() {
+      return this.http.get("http://localhost:9090/login");
+    }
  
     //Logi code here 
   public login(credentials) {
+
     if (credentials.usrLoginId === null || credentials.usrPassword === null) {
       return Observable.throw("Please insert credentials");
     } else {
+
+      console.log(credentials); 
+
       return Observable.create(observer => {
+
+        this.getUser().subscribe((data: User) => {
+          console.log(data.LoginId); 
+  
         // At this point make a request to your backend to make a real check!
-        let access = (credentials.usrPassword === "Angelsm" && credentials.usrLoginId === "bksmita");
-        this.currentUser = new User('Angelsm', 'bksmita');
+        let access = (credentials.usrPassword === data.Password && credentials.usrLoginId === data.LoginId);
+        this.currentUser = new User(data.LoginId, data.Password);
+        console.log(access);
+        if(access){
+          this.storage.set('username', data.LoginId);
+        }else{
+          this.storage.set('username', null);
+        }
+
         observer.next(access);
         observer.complete();
       });
+
+    });
+
     }
   }
 

@@ -46,9 +46,14 @@ export class LoginPage {
  public login(){
    this.showLoading()
    this.auth.login(this.registerCredentials).subscribe(allowed=>{
+
+
+    this.auth.getLoggedInUser().subscribe(data=>{
+      console.log("After sub",data);
+    }); 
       if(allowed){
         console.log(allowed);
-        this.showError('login success')
+        this.showSuccess('login success')
        // this.nav.setRoot('RegisterPage') 
       }else{
         this.showError("Access Denied");
@@ -65,12 +70,27 @@ export class LoginPage {
    });
    this.loading.present();
  }
+
+
+
+ showSuccess(txt){
+  this.loading.dismiss();
+  
+  let alert = this.alertCtrl.create({
+    //title:'fail',
+    title:'success',
+    subTitle:txt,
+    buttons:['Ok']
+  });
+  alert.present();
+ }
+
  showError(txt){
    this.loading.dismiss();
    
    let alert = this.alertCtrl.create({
      //title:'fail',
-     title:'success',
+     title:'Error',
      subTitle:txt,
      buttons:['Ok']
    });

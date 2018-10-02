@@ -17,7 +17,7 @@ import{ AuthServiceProvider} from '../../providers/auth-service/auth-service';
 })
 export class RegisterPage {
   createSuccess = false;
-  registerCredential = {usrLoginId:'',usrPassword:'',conformPassword:'', EmailId:''};
+  registerCredentials = {usrLoginId:'',usrPassword:'',conformPassword:'', EmailId:''};
 
   //constructor(public navCtrl: NavController, public navParams: NavParams) {
   //}
@@ -31,7 +31,7 @@ export class RegisterPage {
       constructor(private nav: NavController, private auth: AuthServiceProvider, private alertCtrl: AlertController) { }
  
                   public register() {
-                    this.auth.register(this.registerCredential).subscribe(success => {
+                    this.auth.register(this.registerCredentials).subscribe(success => {
                       if (success) {
                         this.createSuccess = true;
                         this.showPopup("Success", "Account created.");
