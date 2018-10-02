@@ -17,7 +17,7 @@ export class RestApiProvider {
     console.log('Hello RestApiProvider Provider');
   }
    
-  private apiUrl = 'https://localhost:8101/pages/Observation/getTeacher';
+  private apiUrl = 'http://localhost:9090/getTeacher';
 
   getTeacher(): Observable<string[]> {
     return this.http.get(this.apiUrl).pipe(

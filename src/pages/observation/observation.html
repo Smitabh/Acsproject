@@ -27,13 +27,11 @@
     <ion-item>
         <ion-label>Teacher</ion-label>
         <ion-select [(ngModel)]="teacher" [selectOptions]="teacherAlertOpts">
-          <ion-option>Prof.pate</ion-option>
-          <ion-option>Prof.Kande</ion-option>
-          <ion-option>Nirvana</ion-option>
-          <ion-option (select)="stpSelect()">Stone Temple Pilots</ion-option>
+          <ion-option  *ngFor="let item of AllteacherData" >{{item}}</ion-option>
+         
         </ion-select>
     </ion-item>
-       
+      
 
   </ion-list>   
       

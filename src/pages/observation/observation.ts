@@ -29,6 +29,7 @@ export class ObservationPage {
     this.teacherAlertOpts  = {
       title: 'Select your teacher'
       };
+      this.getTeacher();
   }
   stpSelect() {
     console.log('Teacher selected');
@@ -39,11 +40,14 @@ export class ObservationPage {
     console.log('ionViewDidLoad ObservationPage');
   }
  
- /* getTecaher() {
+ getTeacher() {
     this.rest.getTeacher()
        .subscribe(
-         countries => this.AllteacherData = this.AllteacherData,
+         teachers => { 
+           this.AllteacherData = teachers.data
+            console.log(this.AllteacherData);
+          },
          error =>  this.errorMessage = <any>error);
   }
-   */
+  
 }

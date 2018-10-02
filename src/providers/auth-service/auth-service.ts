@@ -40,8 +40,9 @@ export class AuthServiceProvider {
     
     }
 
-    async getLoggedInUser() {
+     getLoggedInUser() {
       return Observable.create(observer => {
+        
       this.storage.get('username').then((val) => {
         console.log('Your username', val);
       
