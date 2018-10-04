@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import 'rxjs/add/operator/map';
+import { RestApiProvider } from '../../providers/rest-api/rest-api';
 
 export class User {
   LoginId:string;
@@ -36,7 +37,7 @@ export class User {
 export class AuthServiceProvider {
     currentUser: User;
 
-    constructor(private http: HttpClient,private storage: Storage) { 
+    constructor(private http: HttpClient,private storage: Storage, public rest: RestApiProvider) { 
     
     }
 
@@ -97,6 +98,7 @@ export class AuthServiceProvider {
 
   public register(credentials) {
     console.log(credentials);
+    console.log('register');
     if (credentials.usrLoginId === null && credentials.usrPassword === null &&
       credentials.conformPassword == null && credentials.EmailId == null){
       
@@ -104,12 +106,25 @@ export class AuthServiceProvider {
     } else {
       // At this point store the credentials to your backend!
       return Observable.create(observer => {
+           this.addRegister(credentials);
         observer.next(true);
         observer.complete();
       });
     }
   }
- 
+  
+  apiurl ='http://localhost:9090/saveRegister';
+
+  addRegister(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiurl, JSON.stringify(data))
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  } 
   /*public getUserInfo() : User {
     return this.currentUser;
   }*/

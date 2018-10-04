@@ -17,42 +17,41 @@
     <!--form (ngSubmit)="saveObs()" #obsForm = "ngForm"-->
       <ion-list>
           <ion-item>
-            <ion-datetime displayFormat="DDDD MM DD YYYY" [(ngModel)]="obsDate"></ion-datetime>
-            <ion-datetime displayFormat="hh:mm" pickerFormat="h mm" [(ngModel)]="obsTime"></ion-datetime>
+            <ion-datetime displayFormat="DDDD MM DD YYYY" name="obsDate" [(ngModel)]="obj.obsDate"></ion-datetime>
+            <ion-datetime displayFormat="hh:mm" pickerFormat="h mm" name="obsTime" [(ngModel)]="obj.obsTime"></ion-datetime>
           </ion-item>
 
       <ion-item>
             <ion-label>Teacher</ion-label>
-            <ion-select [(ngModel)]="teacher" [selectOptions]="teacherAlertOpts">
+            <ion-select [(ngModel)]="obj.teacherId" name="teacherId" [selectOptions]="teacherAlertOpts">
               <ion-option  *ngFor="let item of AllteacherData" >{{item.TeacheName}}</ion-option>
             </ion-select>
         </ion-item>
-          
+
         <ion-item>
           <ion-label>Classroom</ion-label>
-          <ion-select [(ngModel)]="classroom" [selectOptions]="classrmAlertOpts">
+          <ion-select [(ngModel)]="obj.classroomId" name="classroomId" [selectOptions]="classrmAlertOpts">
             <ion-option  *ngFor="let item of AllClassroomData" >{{item.ClassName}}</ion-option>
           </ion-select>
         </ion-item>   
 
         <ion-item>
           <ion-label>Period</ion-label>
-          <ion-select [(ngModel)]="period" [selectOptions]="periodAlertOpts">
+          <ion-select [(ngModel)]="obj.periodId" name="periodId" [selectOptions]="periodAlertOpts">
             <ion-option  *ngFor="let item of AllPeriodData" >{{item.PeriodName}}</ion-option>
           </ion-select>
         </ion-item> 
 
         <ion-item>
           <ion-label>Remark</ion-label>
-          <ion-select [(ngModel)]="remark" [selectOptions]="remarkAlertOpts">
+          <ion-select [(ngModel)]="obj.remarkId" name="remarkId" [selectOptions]="remarkAlertOpts">
             <ion-option  *ngFor="let item of AllRemarkData" >{{item.RemarkName}}</ion-option>
           </ion-select>
         </ion-item> 
-
         
         <ion-row>
           <ion-col class="signup-col">
-            <button ion-button class="submit-btn" (click) ="saveObs()" full type="submit" >Save</button><!--[disabled]="!obsForm.form.valid"-->
+            <button ion-button class="submit-btn" (click) ="saveObs(obj)" full type="submit" >Save</button><!--[disabled]="!obsForm.form.valid"-->
           </ion-col>
         </ion-row>
 

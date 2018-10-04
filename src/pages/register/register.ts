@@ -27,37 +27,41 @@ export class RegisterPage {
   // }
   //this.nav.popToRoot();
    // this.nav.insert(0,RegisterPage);
-                  
+          
+  
+
       constructor(private nav: NavController, private auth: AuthServiceProvider, private alertCtrl: AlertController) { }
-                  public register() {
-                    this.auth.register(this.registerCredentials).subscribe(success => {
-                      if (success) {
-                        this.createSuccess = true;
-                        this.showPopup("Success", "Account created.");
-                      } else {
-                        this.showPopup("Error", "Problem creating new user");
-                      }
-                    },
-                      error => {
-                        this.showPopup("Error", error);
-                      });
-                  }
-                 
-                  showPopup(title, text) {
-                    let alert = this.alertCtrl.create({
-                      title: title,
-                      subTitle: text,
-                      buttons: [
-                        {
-                          text: 'OK',
-                          handler: data => {
-                            if (this.createSuccess) {
-                              this.nav.popToRoot();
-                            }
-                          }
-                        }
-                      ]
-                    });
-                    alert.present();
+  
+        public saveRegister() {
+          
+          this.auth.register(this.registerCredentials).subscribe(success => {
+            if (success) {
+              this.createSuccess = true;
+              this.showPopup("Success", "Account created.");
+            } else {
+              this.showPopup("Error", "Problem creating new user");
+            }
+          },
+            error => {
+              this.showPopup("Error", error);
+            });
+        }
+        
+        showPopup(title, text) {
+          let alert = this.alertCtrl.create({
+            title: title,
+            subTitle: text,
+            buttons: [
+              {
+                text: 'OK',
+                handler: data => {
+                  if (this.createSuccess) {
+                    this.nav.popToRoot();
                   }
                 }
+              }
+            ]
+          });
+          alert.present();
+        }
+      }

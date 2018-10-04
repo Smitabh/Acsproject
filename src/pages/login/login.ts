@@ -72,8 +72,6 @@ export class LoginPage {
    this.loading.present();
  }
 
-
-
  showSuccess(txt){
   this.loading.dismiss();
   let alert = this.alertCtrl.create({
